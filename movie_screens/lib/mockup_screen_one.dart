@@ -1,71 +1,113 @@
 import 'package:flutter/material.dart';
 
-class MockupScreenOne extends StatelessWidget {
-  final List<Map<String, String>> movies = [
-    {
-      "title": "To All the Boys: P.S. I Still Love You",
-      "subtitle": "Romance, Comedy",
-      "duration": "1h 48m",
-      "rating": "7.2",
-      "image":
-          "https://upload.wikimedia.org/wikipedia/en/6/6d/To_All_the_Boys_P.S._I_Still_Love_You.png",
-    },
-    {
-      "title": "Baby Driver",
-      "subtitle": "Car Action, Crime, Drama",
-      "duration": "1h 53m",
-      "rating": "7.6",
-      "image":
-          "https://upload.wikimedia.org/wikipedia/en/8/8e/Baby_Driver_poster.jpg",
-    },
-    {
-      "title": "John Wick",
-      "subtitle": "Action, Crime, Thriller",
-      "duration": "2h 10m",
-      "rating": "7.4",
-      "image":
-          "https://upload.wikimedia.org/wikipedia/en/9/98/John_Wick_TeaserPoster.jpg",
-    },
-    {
-      "title": "Exit",
-      "subtitle": "Action, Comedy",
-      "duration": "2h 10m",
-      "rating": "6.9",
-      "image":
-          "https://upload.wikimedia.org/wikipedia/en/e/e6/Exit_%282019_film%29.jpg",
-    },
-  ];
+class MockupScreenTwo extends StatelessWidget {
+  const MockupScreenTwo({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.all(16),
-            child: Text(
-              "Discover & Enjoy Your Favourite Movies",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('TMDB'),
+        backgroundColor: Colors.deepPurple,
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Image.network(
+              'https://image.tmdb.org/t/p/w500/xJWPZIYOEFIjZpBL7SVBGnzRYXp.jpg',
+              width: double.infinity,
+              height: 200,
+              fit: BoxFit.cover,
             ),
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: movies.length,
-              itemBuilder: (_, index) {
-                final movie = movies[index];
-                return ListTile(
-                  leading: Image.network(movie["image"]!, width: 50, fit: BoxFit.cover),
-                  title: Text(movie["title"]!),
-                  subtitle: Text("${movie["subtitle"]} • ${movie["duration"]}"),
-                  trailing: CircleAvatar(
-                    backgroundColor: Colors.purple[100],
-                    child: Text(movie["rating"]!),
-                  ),
-                );
+            const SizedBox(height: 10),
+            sectionTitle('What\'s Popular'),
+            horizontalMovieRow([
+              {
+                'title': 'Birds of Prey',
+                'image': 'https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg',
+                'rating': '7.2'
               },
+              {
+                'title': 'Red Sparrow',
+                'image': 'https://image.tmdb.org/t/p/w500/sI4jTu4fWT3JDmScZTfJnVvQHkJ.jpg',
+                'rating': '6.5'
+              },
+              {
+                'title': 'Back Movie',
+                'image': 'https://via.placeholder.com/100x150',
+                'rating': '6.0'
+              },
+            ]),
+            sectionTitle('Now Playing'),
+            horizontalMovieRow([
+              {
+                'title': 'To All the Boys',
+                'image': 'https://image.tmdb.org/t/p/w500/pjeMs3yqRmFL3giJy4PMXWZTTPa.jpg',
+                'rating': '6.5'
+              },
+              {
+                'title': 'Ford v Ferrari',
+                'image': 'https://image.tmdb.org/t/p/w500/xYLBgw7dHyEqmcrSk2Sq3asuSq5.jpg',
+                'rating': '7.8'
+              },
+              {
+                'title': 'Dolittle',
+                'image': 'https://via.placeholder.com/100x150',
+                'rating': '6.0'
+              },
+            ]),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget sectionTitle(String title) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: Text(title,
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+      ),
+    );
+  }
+
+  Widget horizontalMovieRow(List<Map<String, String>> movies) {
+    return SizedBox(
+      height: 180,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: movies.map((movie) {
+          return Container(
+            width: 110,
+            margin: const EdgeInsets.symmetric(horizontal: 8),
+            child: Column(
+              children: [
+                Image.network(
+                  movie['image']!,
+                  width: 100,
+                  height: 140,
+                  fit: BoxFit.cover,
+                ),
+                const SizedBox(height: 4),
+                Text(movie['title']!,
+                    style: const TextStyle(fontSize: 12),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis),
+                const SizedBox(height: 2),
+                CircleAvatar(
+                  radius: 12,
+                  backgroundColor: Colors.deepPurple,
+                  child: Text(
+                    movie['rating']!,
+                    style: const TextStyle(color: Colors.white, fontSize: 10),
+                  ),
+                )
+              ],
             ),
-          ),
-        ],
+          );
+        }).toList(),
       ),
     );
   }
