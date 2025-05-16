@@ -9,19 +9,19 @@ class MockupScreenTwo extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              color: Colors.blue[50],
+              color: Colors.red,
               padding: EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Jumanji: The Next Level',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
                   ),
                   SizedBox(height: 4.0),
                   Text(
                     'Action • Adventure • Comedy • Fantasy',
-                    style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                    style: TextStyle(fontSize: 14, color: Colors.white70),
                   ),
                 ],
               ),
@@ -30,7 +30,7 @@ class MockupScreenTwo extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               child: Text(
                 'What\'s Popular',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
               ),
             ),
             _buildMovieRow(
@@ -49,17 +49,17 @@ class MockupScreenTwo extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               child: Text(
                 'Now Playing',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
               ),
             ),
             _buildMovieRow(
-              imageUrl: 'https://m.media-amazon.com/images/M/MV5BMjA2NjU5MTg1OV5BMl5BanBnXkFtZTgwNjU1NDk3NzM@._V1_.jpg',
+              imageUrl: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FTo_All_the_Boys%3A_P.S._I_Still_Love_You&psig=AOvVaw2aaUfrTvGS16MGlE8E-hzl&ust=1747469287417000&source=images&cd=vfe&opi=89978449&ved=0CBcQjhxqFwoTCOCGg8TEp40DFQAAAAAdAAAAABAE',
               title: 'To All the Boys: P.S. I Still Love You',
               rating: '6.9',
               description: 'Romance, Comedy',
             ),
             _buildMovieRow(
-              imageUrl: 'https://m.media-amazon.com/images/M/MV5BM2UwMDVmMDItM2I2Yi00NGZmLTk4ZTItOWVjZTIwYjNhZjk0XkEyXkFqcGdeQXVyMTA1OTYzOTUx._V1_.jpg',
+              imageUrl: 'https://www.imdb.com/title/tt1950186/?ref_=vp_ov_t',
               title: 'Ford v Ferrari',
               rating: '7.2',
               description: 'Drama, Action',
@@ -83,6 +83,14 @@ class MockupScreenTwo extends StatelessWidget {
               width: 60,
               height: 90,
               fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                return Container(
+                  width: 60,
+                  height: 90,
+                  color: Colors.grey,
+                  child: Center(child: Text('Image Failed', style: TextStyle(color: Colors.white))),
+                );
+              },
             ),
           ),
           SizedBox(width: 16.0),
@@ -92,19 +100,19 @@ class MockupScreenTwo extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
                 ),
                 SizedBox(height: 4.0),
                 Text(
                   description,
-                  style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                  style: TextStyle(fontSize: 14, color: Colors.grey[400]),
                 ),
                 SizedBox(height: 4.0),
                 Row(
                   children: [
                     Icon(Icons.star, color: Colors.yellow, size: 16),
                     SizedBox(width: 4.0),
-                    Text(rating, style: TextStyle(fontSize: 14)),
+                    Text(rating, style: TextStyle(fontSize: 14, color: Colors.white)),
                   ],
                 ),
               ],

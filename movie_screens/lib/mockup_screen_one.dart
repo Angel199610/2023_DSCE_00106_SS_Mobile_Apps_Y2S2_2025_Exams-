@@ -8,41 +8,44 @@ class MockupScreenOne extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
+            Container(
+              color: Colors.red,
               padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-              child: Row(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 16.0),
-                      decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        borderRadius: BorderRadius.circular(25.0),
-                      ),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Q Find your movies...',
-                          border: InputBorder.none,
-                          suffixIcon: Row(
+                  Container(
+                    height: 40.0,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(25.0),
+                    ),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Q Find your movies...',
+                        hintStyle: TextStyle(color: Colors.grey),
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                        suffixIcon: Padding(
+                          padding: const EdgeInsets.only(right: 8.0),
+                          child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text('Sort |', style: TextStyle(color: Colors.grey)),
+                              Text('Sort |', style: TextStyle(color: Colors.grey, fontSize: 14)),
                               SizedBox(width: 4),
-                              Text('Filters', style: TextStyle(color: Colors.grey)),
+                              Text('Filters', style: TextStyle(color: Colors.grey, fontSize: 14)),
                             ],
                           ),
                         ),
                       ),
                     ),
                   ),
+                  SizedBox(height: 8.0),
+                  Text(
+                    'DISCOVER & ENJOY\nYOUR FAVOURITE MOVIES',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
                 ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-              child: Text(
-                'DISCOVER & ENJOY\nYOUR FAVOURITE MOVIES',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
             ),
             Padding(
@@ -62,25 +65,25 @@ class MockupScreenOne extends StatelessWidget {
                 children: [
                   _buildMovieCard(
                     title: 'To All the Boys: P.S. I Still Love You (2019)',
-                    imageUrl: 'https://m.media-amazon.com/images/M/MV5BMjA2NjU5MTg1OV5BMl5BanBnXkFtZTgwNjU1NDk3NzM@._V1_.jpg',
+                    imageUrl: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FTo_All_the_Boys%3A_P.S._I_Still_Love_You&psig=AOvVaw2aaUfrTvGS16MGlE8E-hzl&ust=1747469287417000&source=images&cd=vfe&opi=89978449&ved=0CBcQjhxqFwoTCOCGg8TEp40DFQAAAAAdAAAAABAE',
                     rating: '7.2',
                     description: 'Romance, Comedy\nLara Jean and Peter have just taken their romance from a lo...',
                   ),
                   _buildMovieCard(
                     title: 'Baby Driver',
-                    imageUrl: 'https://m.media-amazon.com/images/M/MV5BMjM3MTI3MzQ2M15BMl5BanBnXkFtZTgwMDE5NjI1MjI@._V1_.jpg',
+                    imageUrl: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.redbubble.com%2Fi%2Fposter%2FBaby-driver-by-mixtape80%2F105516333.LVTDI&psig=AOvVaw3Q_XzmwbMqJVopRepfWLT6&ust=1747469393912000&source=images&cd=vfe&opi=89978449&ved=0CBcQjhxqFwoTCMjN_bvFp40DFQAAAAAdAAAAABAE',
                     rating: '7.2',
                     description: 'Action, Crime, Drama\nAfter being coerced into working for a crime boss, a yo...',
                   ),
                   _buildMovieCard(
                     title: 'John Wick',
-                    imageUrl: 'https://m.media-amazon.com/images/M/MV5BMTU2NjA5NjI5NV5BMl5BanBnXkFtZTgwMTM2MTI4MjE@._V1_.jpg',
+                    imageUrl: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.peakpx.com%2Fen%2Fhd-wallpaper-desktop-pcfld&psig=AOvVaw1TAE4w7EuU7yFEjPdLIwXS&ust=1747469578901000&source=images&cd=vfe&opi=89978449&ved=0CBcQjhxqFwoTCICt9ODFp40DFQAAAAAdAAAAABAE',
                     rating: '7.2',
                     description: 'Action, Crime, Thriller\nJohn Wick is on the run after killing a member of the intern...',
                   ),
                   _buildMovieCard(
                     title: 'Exit',
-                    imageUrl: 'https://m.media-amazon.com/images/M/MV5BNjI2MjEwZmMtZmJhZS00NjQ2LWJkM2QtNTliNjE2NzQ0NDhjXkEyXkFqcGdeQXVyNjM4NzI1NTQ@._V1_.jpg',
+                    imageUrl: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.imdb.com%2Ftitle%2Ftt1988621%2F&psig=AOvVaw3M1b3e2O8G3f3k83sfNgSX&ust=1747469691989000&source=images&cd=vfe&opi=89978449&ved=0CBcQjhxqFwoTCKCgrpjGp40DFQAAAAAdAAAAABAE',
                     rating: '7.2',
                     description: 'Action, Comedy\nVietnam / La luna rossa were one...',
                   ),
@@ -97,7 +100,7 @@ class MockupScreenOne extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       decoration: BoxDecoration(
-        color: isSelected ? Colors.blue : Colors.grey[200],
+        color: isSelected ? Colors.red : Colors.grey[200],
         borderRadius: BorderRadius.circular(20.0),
       ),
       child: Text(
@@ -123,6 +126,14 @@ class MockupScreenOne extends StatelessWidget {
               width: 100,
               height: 150,
               fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                return Container(
+                  width: 100,
+                  height: 150,
+                  color: Colors.grey,
+                  child: Center(child: Text('Image Failed', style: TextStyle(color: Colors.white))),
+                );
+              },
             ),
           ),
           SizedBox(width: 16.0),
@@ -132,12 +143,12 @@ class MockupScreenOne extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
                 ),
                 SizedBox(height: 4.0),
                 Text(
                   description,
-                  style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                  style: TextStyle(fontSize: 14, color: Colors.grey[400]),
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -146,7 +157,7 @@ class MockupScreenOne extends StatelessWidget {
                   children: [
                     Icon(Icons.star, color: Colors.yellow, size: 16),
                     SizedBox(width: 4.0),
-                    Text(rating, style: TextStyle(fontSize: 14)),
+                    Text(rating, style: TextStyle(fontSize: 14, color: Colors.white)),
                   ],
                 ),
               ],
