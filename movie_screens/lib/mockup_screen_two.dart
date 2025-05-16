@@ -1,113 +1,117 @@
 import 'package:flutter/material.dart';
 
 class MockupScreenTwo extends StatelessWidget {
-  const MockupScreenTwo({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('TMDB'),
-        backgroundColor: Colors.deepPurple,
-      ),
-      body: SingleChildScrollView(
+      body: SafeArea(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.network(
-              'https://image.tmdb.org/t/p/w500/xJWPZIYOEFIjZpBL7SVBGnzRYXp.jpg',
-              width: double.infinity,
-              height: 200,
-              fit: BoxFit.cover,
+            Container(
+              color: Colors.blue[50],
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Jumanji: The Next Level',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 4.0),
+                  Text(
+                    'Action • Adventure • Comedy • Fantasy',
+                    style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                  ),
+                ],
+              ),
             ),
-            const SizedBox(height: 10),
-            sectionTitle('What\'s Popular'),
-            horizontalMovieRow([
-              {
-                'title': 'Birds of Prey',
-                'image': 'https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg',
-                'rating': '7.2'
-              },
-              {
-                'title': 'Red Sparrow',
-                'image': 'https://image.tmdb.org/t/p/w500/sI4jTu4fWT3JDmScZTfJnVvQHkJ.jpg',
-                'rating': '6.5'
-              },
-              {
-                'title': 'Back Movie',
-                'image': 'https://via.placeholder.com/100x150',
-                'rating': '6.0'
-              },
-            ]),
-            sectionTitle('Now Playing'),
-            horizontalMovieRow([
-              {
-                'title': 'To All the Boys',
-                'image': 'https://image.tmdb.org/t/p/w500/pjeMs3yqRmFL3giJy4PMXWZTTPa.jpg',
-                'rating': '6.5'
-              },
-              {
-                'title': 'Ford v Ferrari',
-                'image': 'https://image.tmdb.org/t/p/w500/xYLBgw7dHyEqmcrSk2Sq3asuSq5.jpg',
-                'rating': '7.8'
-              },
-              {
-                'title': 'Dolittle',
-                'image': 'https://via.placeholder.com/100x150',
-                'rating': '6.0'
-              },
-            ]),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              child: Text(
+                'What\'s Popular',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
+            _buildMovieRow(
+              imageUrl: 'https://m.media-amazon.com/images/M/MV5BMmIzNDk4MDEtNWZiMi00NDZlLTg2ZjctYjA3MjQ0NDkwZjhhXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg',
+              title: 'Birds of Prey',
+              rating: '7.2',
+              description: 'Action, Crime, Comedy, Drama',
+            ),
+            _buildMovieRow(
+              imageUrl: 'https://m.media-amazon.com/images/M/MV5BMTA3MDkxOTc4NDdeQTJeQWpwZ15BbWU4MDAxNzgyNTQz._V1_.jpg',
+              title: 'Red Sparrow',
+              rating: '6.5',
+              description: 'Mystery, Thriller',
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              child: Text(
+                'Now Playing',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
+            _buildMovieRow(
+              imageUrl: 'https://m.media-amazon.com/images/M/MV5BMjA2NjU5MTg1OV5BMl5BanBnXkFtZTgwNjU1NDk3NzM@._V1_.jpg',
+              title: 'To All the Boys: P.S. I Still Love You',
+              rating: '6.9',
+              description: 'Romance, Comedy',
+            ),
+            _buildMovieRow(
+              imageUrl: 'https://m.media-amazon.com/images/M/MV5BM2UwMDVmMDItM2I2Yi00NGZmLTk4ZTItOWVjZTIwYjNhZjk0XkEyXkFqcGdeQXVyMTA1OTYzOTUx._V1_.jpg',
+              title: 'Ford v Ferrari',
+              rating: '7.2',
+              description: 'Drama, Action',
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget sectionTitle(String title) {
+  Widget _buildMovieRow({required String imageUrl, required String title, required String rating, required String description}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: Text(title,
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-      ),
-    );
-  }
-
-  Widget horizontalMovieRow(List<Map<String, String>> movies) {
-    return SizedBox(
-      height: 180,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        children: movies.map((movie) {
-          return Container(
-            width: 110,
-            margin: const EdgeInsets.symmetric(horizontal: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8.0),
+            child: Image.network(
+              imageUrl,
+              width: 60,
+              height: 90,
+              fit: BoxFit.cover,
+            ),
+          ),
+          SizedBox(width: 16.0),
+          Expanded(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image.network(
-                  movie['image']!,
-                  width: 100,
-                  height: 140,
-                  fit: BoxFit.cover,
+                Text(
+                  title,
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 4),
-                Text(movie['title']!,
-                    style: const TextStyle(fontSize: 12),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis),
-                const SizedBox(height: 2),
-                CircleAvatar(
-                  radius: 12,
-                  backgroundColor: Colors.deepPurple,
-                  child: Text(
-                    movie['rating']!,
-                    style: const TextStyle(color: Colors.white, fontSize: 10),
-                  ),
-                )
+                SizedBox(height: 4.0),
+                Text(
+                  description,
+                  style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                ),
+                SizedBox(height: 4.0),
+                Row(
+                  children: [
+                    Icon(Icons.star, color: Colors.yellow, size: 16),
+                    SizedBox(width: 4.0),
+                    Text(rating, style: TextStyle(fontSize: 14)),
+                  ],
+                ),
               ],
             ),
-          );
-        }).toList(),
+          ),
+          Icon(Icons.arrow_forward, color: Colors.grey),
+        ],
       ),
     );
   }

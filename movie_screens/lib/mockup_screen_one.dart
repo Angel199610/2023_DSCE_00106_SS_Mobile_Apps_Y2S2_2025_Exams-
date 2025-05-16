@@ -1,113 +1,158 @@
 import 'package:flutter/material.dart';
 
-class MockupScreenTwo extends StatelessWidget {
-  const MockupScreenTwo({Key? key}) : super(key: key);
-
+class MockupScreenOne extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('TMDB'),
-        backgroundColor: Colors.deepPurple,
-      ),
-      body: SingleChildScrollView(
+      body: SafeArea(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.network(
-              'https://image.tmdb.org/t/p/w500/xJWPZIYOEFIjZpBL7SVBGnzRYXp.jpg',
-              width: double.infinity,
-              height: 200,
-              fit: BoxFit.cover,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 16.0),
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        borderRadius: BorderRadius.circular(25.0),
+                      ),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: 'Q Find your movies...',
+                          border: InputBorder.none,
+                          suffixIcon: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text('Sort |', style: TextStyle(color: Colors.grey)),
+                              SizedBox(width: 4),
+                              Text('Filters', style: TextStyle(color: Colors.grey)),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-            const SizedBox(height: 10),
-            sectionTitle('What\'s Popular'),
-            horizontalMovieRow([
-              {
-                'title': 'Birds of Prey',
-                'image': 'https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg',
-                'rating': '7.2'
-              },
-              {
-                'title': 'Red Sparrow',
-                'image': 'https://image.tmdb.org/t/p/w500/sI4jTu4fWT3JDmScZTfJnVvQHkJ.jpg',
-                'rating': '6.5'
-              },
-              {
-                'title': 'Back Movie',
-                'image': 'https://via.placeholder.com/100x150',
-                'rating': '6.0'
-              },
-            ]),
-            sectionTitle('Now Playing'),
-            horizontalMovieRow([
-              {
-                'title': 'To All the Boys',
-                'image': 'https://image.tmdb.org/t/p/w500/pjeMs3yqRmFL3giJy4PMXWZTTPa.jpg',
-                'rating': '6.5'
-              },
-              {
-                'title': 'Ford v Ferrari',
-                'image': 'https://image.tmdb.org/t/p/w500/xYLBgw7dHyEqmcrSk2Sq3asuSq5.jpg',
-                'rating': '7.8'
-              },
-              {
-                'title': 'Dolittle',
-                'image': 'https://via.placeholder.com/100x150',
-                'rating': '6.0'
-              },
-            ]),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              child: Text(
+                'DISCOVER & ENJOY\nYOUR FAVOURITE MOVIES',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _buildCategoryButton('Popular', isSelected: true),
+                  _buildCategoryButton('Upcoming'),
+                  _buildCategoryButton('Now Playing'),
+                ],
+              ),
+            ),
+            Expanded(
+              child: ListView(
+                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                children: [
+                  _buildMovieCard(
+                    title: 'To All the Boys: P.S. I Still Love You (2019)',
+                    imageUrl: 'https://m.media-amazon.com/images/M/MV5BMjA2NjU5MTg1OV5BMl5BanBnXkFtZTgwNjU1NDk3NzM@._V1_.jpg',
+                    rating: '7.2',
+                    description: 'Romance, Comedy\nLara Jean and Peter have just taken their romance from a lo...',
+                  ),
+                  _buildMovieCard(
+                    title: 'Baby Driver',
+                    imageUrl: 'https://m.media-amazon.com/images/M/MV5BMjM3MTI3MzQ2M15BMl5BanBnXkFtZTgwMDE5NjI1MjI@._V1_.jpg',
+                    rating: '7.2',
+                    description: 'Action, Crime, Drama\nAfter being coerced into working for a crime boss, a yo...',
+                  ),
+                  _buildMovieCard(
+                    title: 'John Wick',
+                    imageUrl: 'https://m.media-amazon.com/images/M/MV5BMTU2NjA5NjI5NV5BMl5BanBnXkFtZTgwMTM2MTI4MjE@._V1_.jpg',
+                    rating: '7.2',
+                    description: 'Action, Crime, Thriller\nJohn Wick is on the run after killing a member of the intern...',
+                  ),
+                  _buildMovieCard(
+                    title: 'Exit',
+                    imageUrl: 'https://m.media-amazon.com/images/M/MV5BNjI2MjEwZmMtZmJhZS00NjQ2LWJkM2QtNTliNjE2NzQ0NDhjXkEyXkFqcGdeQXVyNjM4NzI1NTQ@._V1_.jpg',
+                    rating: '7.2',
+                    description: 'Action, Comedy\nVietnam / La luna rossa were one...',
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget sectionTitle(String title) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: Text(title,
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+  Widget _buildCategoryButton(String label, {bool isSelected = false}) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      decoration: BoxDecoration(
+        color: isSelected ? Colors.blue : Colors.grey[200],
+        borderRadius: BorderRadius.circular(20.0),
+      ),
+      child: Text(
+        label,
+        style: TextStyle(
+          color: isSelected ? Colors.white : Colors.black,
+          fontWeight: FontWeight.bold,
+        ),
       ),
     );
   }
 
-  Widget horizontalMovieRow(List<Map<String, String>> movies) {
-    return SizedBox(
-      height: 180,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        children: movies.map((movie) {
-          return Container(
-            width: 110,
-            margin: const EdgeInsets.symmetric(horizontal: 8),
+  Widget _buildMovieCard({required String title, required String imageUrl, required String rating, required String description}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8.0),
+            child: Image.network(
+              imageUrl,
+              width: 100,
+              height: 150,
+              fit: BoxFit.cover,
+            ),
+          ),
+          SizedBox(width: 16.0),
+          Expanded(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image.network(
-                  movie['image']!,
-                  width: 100,
-                  height: 140,
-                  fit: BoxFit.cover,
+                Text(
+                  title,
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 4),
-                Text(movie['title']!,
-                    style: const TextStyle(fontSize: 12),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis),
-                const SizedBox(height: 2),
-                CircleAvatar(
-                  radius: 12,
-                  backgroundColor: Colors.deepPurple,
-                  child: Text(
-                    movie['rating']!,
-                    style: const TextStyle(color: Colors.white, fontSize: 10),
-                  ),
-                )
+                SizedBox(height: 4.0),
+                Text(
+                  description,
+                  style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                SizedBox(height: 4.0),
+                Row(
+                  children: [
+                    Icon(Icons.star, color: Colors.yellow, size: 16),
+                    SizedBox(width: 4.0),
+                    Text(rating, style: TextStyle(fontSize: 14)),
+                  ],
+                ),
               ],
             ),
-          );
-        }).toList(),
+          ),
+        ],
       ),
     );
   }
